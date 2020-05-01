@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/learn.mybatis/IPersistence/pom.xml" />
+        <option value="$PROJECT_DIR$/learn.mybatis/IPersistence_test/pom.xml" />
+        <option value="$PROJECT_DIR$/learn.mybatis/design_pattern/pom.xml" />
+        <option value="$PROJECT_DIR$/learn.mybatis/mybatis-3-master/pom.xml" />
+        <option value="$PROJECT_DIR$/learn.mybatis/mybatis_quickStarter/pom.xml" />
+        <option value="$PROJECT_DIR$/learn.mybatis/mybatis_multitable/pom.xml" />
+        <option value="$PROJECT_DIR$/learn.spring/demo-ioc-aop/pom.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_10" project-jdk-name="11" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+</project>
