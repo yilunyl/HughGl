@@ -1,11 +1,24 @@
 package com.hugh.pojo;
 
+import lombok.Builder;
+
+@Builder
 public class User {
 
     private Integer id;
     private String username;
     private String password;
     private String birthday;
+
+    public User() {
+    }
+
+    public User(Integer id, String username, String password, String birthday) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.birthday = birthday;
+    }
 
     public String getPassword() {
         return password;

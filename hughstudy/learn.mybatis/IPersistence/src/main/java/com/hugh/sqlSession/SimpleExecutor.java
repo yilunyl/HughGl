@@ -7,6 +7,7 @@ import com.hugh.pojo.MappedStatement;
 import com.hugh.utils.GenericTokenParser;
 import com.hugh.utils.ParameterMapping;
 import com.hugh.utils.ParameterMappingTokenHandler;
+import lombok.extern.slf4j.Slf4j;
 
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Field;
@@ -18,6 +19,7 @@ import java.sql.ResultSetMetaData;
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 public class SimpleExecutor implements  Executor {
 
     @SuppressWarnings("unchecked")
@@ -94,13 +96,92 @@ public class SimpleExecutor implements  Executor {
 
     }
 
+    @Override
+    public int update(Configuration configuration, MappedStatement mappedStatement, Object... params) throws Exception {
+
+        //处理动态sql中foreach
+        if(mappedStatement.isDynamicSql() && params[0] instanceof List){
+            return updateForEach(configuration, mappedStatement, (List)params[0]);
+        }
+
+        //注册驱动，获取连接
+        Connection connection = configuration.getDataSource().getConnection();
+        String sql = mappedStatement.getSql();
+        BoundSql boundSql = getBoundSql(sql);
+        log.info("sql:{}", boundSql.getSqlText());
+        PreparedStatement preparedStatement = connection.prepareStatement(boundSql.getSqlText());
+        // 4. 设置参数
+        //获取到了参数的全路径
+        String paramterType = mappedStatement.getParamterType();
+        //获取参数的类对象
+        Class<?> paramtertypeClass = getClassType(paramterType);
+
+        List<ParameterMapping> parameterMappingList = boundSql.getParameterMappingList();
+        //通过遍历参数list(应该必须保证有序)，一次给对应的'?'占位符进行赋值
+        for (int i = 0; i < parameterMappingList.size(); i++) {
+            ParameterMapping parameterMapping = parameterMappingList.get(i);
+            String content = parameterMapping.getContent();
+
+            //反射 获取属性对象
+            Field declaredField = paramtertypeClass.getDeclaredField(content);
+            //暴力访问
+            declaredField.setAccessible(true);
+            //o就是获取到的属性值
+            Object o = declaredField.get(params[0]);
+            //preparedStatement的序号是从1开始的
+            preparedStatement.setObject(i+1,o);
+
+        }
+        return preparedStatement.executeUpdate();
+    }
+
+    private int updateForEach(Configuration configuration, MappedStatement mappedStatement, List list) throws Exception {
+        //注册驱动，获取连接
+        Connection connection = configuration.getDataSource().getConnection();
+        StringBuilder sb = new StringBuilder(mappedStatement.getSql());
+        for(int index=0;index<list.size();index++) {
+            sb.append(mappedStatement.getDynamicSql());
+            if(index +1 < list.size()){
+                sb.append(",");
+            }
+        }
+        String sql = sb.toString();
+        BoundSql dynamicBoundSql = getBoundSql(sql);
+        log.info("sql:{}", dynamicBoundSql.getSqlText());
+        PreparedStatement preparedStatement = connection.prepareStatement(dynamicBoundSql.getSqlText());
+        // 4. 设置参数
+        //获取到了参数的全路径
+        String paramterType = list.get(0).getClass().getName();
+        //获取参数的类对象
+        Class<?> paramtertypeClass = getClassType(paramterType);
+
+        List<ParameterMapping> parameterMappingList = dynamicBoundSql.getParameterMappingList();
+        int size = parameterMappingList.size();
+        int eachObj = size / list.size();
+        //通过遍历参数list(应该必须保证有序)，一次给对应的'?'占位符进行赋值
+        for (int i = 0; i < parameterMappingList.size(); i++) {
+            ParameterMapping parameterMapping = parameterMappingList.get(i);
+            String content = parameterMapping.getContent();
+
+            //反射 获取属性对象
+            Field declaredField = paramtertypeClass.getDeclaredField(content);
+            //暴力访问
+            declaredField.setAccessible(true);
+            //o就是获取到的属性值
+            Object o = declaredField.get(list.get(i/eachObj));
+            //preparedStatement的序号是从1开始的
+            preparedStatement.setObject(i + 1, o);
+        }
+
+        return preparedStatement.executeUpdate();
+    }
+
     private Class<?> getClassType(String paramterType) throws ClassNotFoundException {
         if(paramterType!=null){
             Class<?> aClass = Class.forName(paramterType);
             return aClass;
         }
          return null;
-
     }
 
 

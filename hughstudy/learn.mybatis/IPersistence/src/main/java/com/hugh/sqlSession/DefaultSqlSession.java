@@ -3,21 +3,25 @@ package com.hugh.sqlSession;
 
 import com.hugh.pojo.Configuration;
 import com.hugh.pojo.MappedStatement;
+import com.hugh.utils.SqlCommandType;
 
 import java.lang.reflect.*;
+import java.sql.SQLException;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class DefaultSqlSession implements SqlSession {
 
     private Configuration configuration;
 
-    public DefaultSqlSession(Configuration configuration) {
+    DefaultSqlSession(Configuration configuration) {
         this.configuration = configuration;
     }
 
     @Override
     @SuppressWarnings("unchecked")
-    public <E> List<E> selectList(String statementid, Object... params) throws Exception {
+    public  <E> List<E> selectList(String statementid, Object... params) throws Exception {
 
         //将要去完成对simpleExecutor里的query方法的调用
         SimpleExecutor simpleExecutor = new SimpleExecutor();
@@ -41,6 +45,26 @@ public class DefaultSqlSession implements SqlSession {
     }
 
     @Override
+    public int update(String statementid, Object... params) throws Exception {
+        //here can do something
+        SimpleExecutor simpleExecutor = new SimpleExecutor();
+        MappedStatement mappedStatement = configuration.getMappedStatementMap().get(statementid);
+        return simpleExecutor.update(configuration, mappedStatement, params);
+    }
+
+    @Override
+    public int insert(String statementid, Object... params) throws Exception {
+        //here can do something
+        return update(statementid, params);
+    }
+
+    @Override
+    public int delete(String statementid, Object... params) throws Exception {
+        //here can do something
+        return update(statementid, params);
+    }
+
+    @Override
     @SuppressWarnings("unchecked")
     public <T> T getMapper(Class<?> mapperClass) {
         // 使用JDK动态代理来为Dao接口生成代理对象，并返回
@@ -55,20 +79,29 @@ public class DefaultSqlSession implements SqlSession {
                 String className = method.getDeclaringClass().getName();
 
                 String statementId = className+"."+methodName;
-
-                // 准备参数2：params:args
-                // 获取被调用方法的返回值类型
-                Type genericReturnType = method.getGenericReturnType();
-                // 判断是否进行了 泛型类型参数化,true代表一个集合，false代表一个对象
-                if(genericReturnType instanceof ParameterizedType){
-                    return selectList(statementId, args);
+                SqlCommandType commandType = configuration.getMappedStatementMap().get(statementId).getCommandType();
+                switch (commandType){
+                    case SELECT:{
+                        // 准备参数2：params:args
+                        // 获取被调用方法的返回值类型
+                        Type genericReturnType = method.getGenericReturnType();
+                        // 判断是否进行了 泛型类型参数化,true代表一个集合，false代表一个对象
+                        if (genericReturnType instanceof ParameterizedType) {
+                            return selectList(statementId, args);
+                        }
+                        return selectOne(statementId, args);
+                    }
+                    case INSERT:
+                        return insert(statementId, args);
+                    case DELETE:
+                        return delete(statementId, args);
+                    case UPDATE:
+                        return update(statementId, args);
+                    default:
+                        throw new RuntimeException("暂不支持的处理类型");
                 }
-
-                return selectOne(statementId,args);
-
             }
         });
-
         return (T) proxyInstance;
     }
 

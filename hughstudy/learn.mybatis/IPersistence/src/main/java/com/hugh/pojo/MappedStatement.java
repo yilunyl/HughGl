@@ -1,5 +1,7 @@
 package com.hugh.pojo;
 
+import com.hugh.utils.SqlCommandType;
+
 /**
  * @Classname MappedStatement
  * @Description TODO
@@ -16,6 +18,36 @@ public class MappedStatement {
     private String paramterType;
     //sql语句
     private String sql;
+    //是否是动态sql
+    private boolean isDynamicSql = false;
+    //
+    private String dynamicSql = "";
+
+    public boolean isDynamicSql() {
+        return isDynamicSql;
+    }
+
+    public void setDynamicSql(boolean dynamicSql) {
+        isDynamicSql = dynamicSql;
+    }
+
+    public String getDynamicSql() {
+        return dynamicSql;
+    }
+
+    public void setDynamicSql(String dynamicSql) {
+        this.dynamicSql = dynamicSql;
+    }
+
+    //处理sql的操作类型
+    private SqlCommandType commandType;
+    public SqlCommandType getCommandType() {
+        return commandType;
+    }
+
+    public void setCommandType(SqlCommandType commandType) {
+        this.commandType = commandType;
+    }
 
     public String getId() {
         return id;
