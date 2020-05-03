@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="FrameworkDetectionExcludesConfiguration">
+    <file type="web" url="file://$PROJECT_DIR$/learn.spring/lagou-transfer" />
+    <file type="web" url="file://$PROJECT_DIR$/learn.spring/lagou-transfer-ioc-anno" />
+    <file type="web" url="file://$PROJECT_DIR$/learn.spring/lagou-transfer-ioc-xml-anno" />
+    <file type="web" url="file://$PROJECT_DIR$/learn.spring/lagou-transfer-iocxml" />
+    <file type="web" url="file://$PROJECT_DIR$/learn.spring/lagou-transfer-transaction" />
+  </component>
   <component name="MavenProjectsManager">
     <option name="originalFiles">
       <list>
@@ -12,6 +19,12 @@
         <option value="$PROJECT_DIR$/learn.mybatis/mybatis_quickStarter/pom.xml" />
         <option value="$PROJECT_DIR$/learn.mybatis/mybatis_multitable/pom.xml" />
         <option value="$PROJECT_DIR$/learn.spring/demo-ioc-aop/pom.xml" />
+        <option value="$PROJECT_DIR$/learn.spring/demo-others/pom.xml" />
+        <option value="$PROJECT_DIR$/learn.spring/lagou-transfer/pom.xml" />
+        <option value="$PROJECT_DIR$/learn.spring/lagou-transfer-ioc-anno/pom.xml" />
+        <option value="$PROJECT_DIR$/learn.spring/lagou-transfer-ioc-xml-anno/pom.xml" />
+        <option value="$PROJECT_DIR$/learn.spring/lagou-transfer-iocxml/pom.xml" />
+        <option value="$PROJECT_DIR$/learn.spring/lagou-transfer-transaction/pom.xml" />
       </list>
     </option>
   </component>
