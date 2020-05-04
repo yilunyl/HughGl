@@ -6,15 +6,21 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="lagou-transfer-ioc-anno" />
+        <module name="lagou-transfer-iocxml" />
+        <module name="mybatis_multitable" />
+        <module name="design_pattern" />
+        <module name="lagou-transfer-transaction" />
+        <module name="demo-ioc-aop" />
+        <module name="learnspring" />
         <module name="IPersistence_test" />
         <module name="mybatis" />
-        <module name="IPersistence" />
-        <module name="learnspring" />
-        <module name="mybatis_multitable" />
-        <module name="demo-ioc-aop" />
+        <module name="lagou-transfer" />
+        <module name="lagou-transfer-ioc-xml-anno" />
         <module name="learnmybatis" />
         <module name="mybatis_quickStarter" />
-        <module name="design_pattern" />
+        <module name="IPersistence" />
+        <module name="demo-others" />
       </profile>
     </annotationProcessing>
   </component>

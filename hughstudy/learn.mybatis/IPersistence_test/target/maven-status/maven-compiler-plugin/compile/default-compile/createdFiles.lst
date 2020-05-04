@@ -1,0 +1,4 @@
+com/hugh/dao/IUserDao.class
+com/hugh/test/IPersistenceTest.class
+com/hugh/pojo/User.class
+com/hugh/pojo/User$UserBuilder.class
