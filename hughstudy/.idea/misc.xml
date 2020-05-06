@@ -7,6 +7,7 @@
     <file type="web" url="file://$PROJECT_DIR$/learn.spring/lagou-transfer-ioc-xml-anno" />
     <file type="web" url="file://$PROJECT_DIR$/learn.spring/lagou-transfer-iocxml" />
     <file type="web" url="file://$PROJECT_DIR$/learn.spring/lagou-transfer-transaction" />
+    <file type="web" url="file://$PROJECT_DIR$/learn.spring/transfer-customize-anno" />
   </component>
   <component name="MavenProjectsManager">
     <option name="originalFiles">
@@ -25,6 +26,7 @@
         <option value="$PROJECT_DIR$/learn.spring/lagou-transfer-ioc-xml-anno/pom.xml" />
         <option value="$PROJECT_DIR$/learn.spring/lagou-transfer-iocxml/pom.xml" />
         <option value="$PROJECT_DIR$/learn.spring/lagou-transfer-transaction/pom.xml" />
+        <option value="$PROJECT_DIR$/learn.spring/transfer-customize-anno/pom.xml" />
       </list>
     </option>
   </component>

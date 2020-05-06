@@ -13,6 +13,7 @@
         <module name="lagou-transfer-transaction" />
         <module name="demo-ioc-aop" />
         <module name="learnspring" />
+        <module name="transfer-customize-anno" />
         <module name="IPersistence_test" />
         <module name="mybatis" />
         <module name="lagou-transfer" />
