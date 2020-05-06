@@ -2,14 +2,9 @@ package com.lagou.edu.dao.impl;
 
 import com.lagou.edu.anno.GlAutowired;
 import com.lagou.edu.anno.GlService;
-import com.lagou.edu.anno.GlTransactional;
 import com.lagou.edu.pojo.Account;
 import com.lagou.edu.dao.AccountDao;
 import com.lagou.edu.utils.ConnectionUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Repository;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

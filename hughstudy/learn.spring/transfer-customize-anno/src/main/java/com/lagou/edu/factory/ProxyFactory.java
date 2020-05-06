@@ -3,13 +3,10 @@ package com.lagou.edu.factory;
 import com.lagou.edu.anno.GlAutowired;
 import com.lagou.edu.anno.GlService;
 import com.lagou.edu.anno.GlTransactional;
-import com.lagou.edu.pojo.Account;
 import com.lagou.edu.utils.TransactionManager;
 import net.sf.cglib.proxy.Enhancer;
 import net.sf.cglib.proxy.MethodInterceptor;
 import net.sf.cglib.proxy.MethodProxy;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;

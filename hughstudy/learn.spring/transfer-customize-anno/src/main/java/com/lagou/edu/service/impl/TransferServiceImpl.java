@@ -6,13 +6,6 @@ import com.lagou.edu.anno.GlTransactional;
 import com.lagou.edu.dao.AccountDao;
 import com.lagou.edu.pojo.Account;
 import com.lagou.edu.service.TransferService;
-import com.lagou.edu.utils.ConnectionUtils;
-import com.lagou.edu.utils.TransactionManager;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.annotation.ImportResource;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 
 

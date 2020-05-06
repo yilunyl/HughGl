@@ -1,15 +1,11 @@
 package com.lagou.edu.servlet;
 
-import com.lagou.edu.anno.GlAutowired;
 import com.lagou.edu.context.GlApplicationContext;
-import com.lagou.edu.factory.ProxyFactory;
 import com.lagou.edu.utils.JsonUtils;
 import com.lagou.edu.pojo.Result;
 import com.lagou.edu.service.TransferService;
 import lombok.SneakyThrows;
-import org.springframework.web.bind.support.WebExchangeBindException;
-import org.springframework.web.context.WebApplicationContext;
-import org.springframework.web.context.support.WebApplicationContextUtils;
+
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
