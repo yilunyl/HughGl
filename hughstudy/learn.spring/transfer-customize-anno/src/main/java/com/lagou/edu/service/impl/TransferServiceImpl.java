@@ -13,14 +13,14 @@ import com.lagou.edu.service.TransferService;
  * @author 应癫
  */
 @GlService
-//@GlTransactional
+@GlTransactional
 public class TransferServiceImpl implements TransferService {
 
     @GlAutowired("accountDao")
     private AccountDao accountDao;
 
     @Override
-    @GlTransactional
+    //@GlTransactional
     public void transfer(String fromCardNo, String toCardNo, int money) throws Exception {
 
             Account from = accountDao.queryAccountByCardNo(fromCardNo);
@@ -30,7 +30,7 @@ public class TransferServiceImpl implements TransferService {
             to.setMoney(to.getMoney()+money);
 
             accountDao.updateAccountByCardNo(to);
-            //int c = 1/0;
+            int c = 1/0;
             accountDao.updateAccountByCardNo(from);
     }
 }
