@@ -12,7 +12,7 @@
             2、然后根据已经获取好的bean注入到@GlAutowired声明的地方
             3、单独处理剩下的@GlTransactional的类，先生成该bean然后运用动态代理，实现事务的功能(initTransactionalBean方法)
  测试方法：1、启动服务
-          2、跑test:IoCTest.testIoC
+         2、跑test:IoCTest.testIoC(推荐，比较方便)
  实际验证结果：通过
  
 
